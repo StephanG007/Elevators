@@ -14,15 +14,19 @@ In order to better assess program's decisions, I have decided to print out all t
 
 There are several things that I know are less than ideal with the current program, but have decided to keep for various reasons. Here is my reason for keeping them:
 
-1. **Non Injected Configuration**: Ideally there would be a config builder that could be injected into the various classes. But given the simplicity of this Console Application, I simply simulated having an injected configuration by reading the settings into a dictionary. This is not how I would do it in a more complicated solution, but wanted to keep my code readable and the plumbing to a minimum.
+1. **Failure to Parse**: I've simply written the local.settings JSON in the format expected by my environment. Depending on your Environment it may fail to parse the double values. I didn't consider it worth the trouble of accounting for. If you experience this error, just change the values to use a period instead of a comma.
 
-2. **Synchronous vs. Asynchronous**: The simulation uses asynchronous methods for sending elevator notifications in case of failure but doesn't fully utilize async/await throughout the codebase. This decision was made to keep the code simple and focused on the elevator logic.
+2. **Non Injected Configuration**: Ideally there would be a config builder that could be injected into the various classes. But given the simplicity of this Console Application, I simply simulated having an injected configuration by reading the settings into a dictionary. This is not how I would do it in a more complicated solution, but wanted to keep my code readable and the plumbing to a minimum.
 
-3. **Requests Don't Have Direction**: A real elevator has buttons to indicate direction when summon them. However it seems to me that this would drastically increase the complexity of the program, while delivering very debatable results in a context where new requests can arrive at any time.
+3. **Synchronous vs. Asynchronous**: The simulation uses asynchronous methods for sending elevator notifications in case of failure but doesn't fully utilize async/await throughout the codebase. This decision was made to keep the code simple and focused on the elevator logic.
 
-4. **Elevator Failure**: The simulation has a configurable percentage chance of elevator failure. When an elevator is sent to a floor, it may fail with the given probability. In the case of failure, the simulation will try to send the next best elevator and send an HTTP notification to an external party to notify them of the failure. This is purely for demonstration purposes, in practise different kinds of failures would be handled differently.
+4. **Requests Don't Have Direction**: A real elevator has buttons to indicate direction when summon them. However it seems to me that this would drastically increase the complexity of the program, while delivering very debatable results in a context where new requests can arrive at any time.
 
-5. **Outgoing Call Error Handling** I have included the functionality for the elevator to make an outgoing call to an external party in the event of an elevator failure to communicate that it needs maintenance or intervention. This is only for demonstration purposes, in practise there would be a variety of potential errors that are each handled differently. Also there would be a much more thorough handling of an outgoing request that fails, however as that is outside of the scope of this exercise, I have left it to a bare minimum.
+5. **Elevator Failure**: The simulation has a configurable percentage chance of elevator failure. When an elevator is sent to a floor, it may fail with the given probability. In the case of failure, the simulation will try to send the next best elevator and send an HTTP notification to an external party to notify them of the failure. This is purely for demonstration purposes, in practise different kinds of failures would be handled differently.
+
+6. **Outgoing Call Error Handling** I have included the functionality for the elevator to make an outgoing call to an external party in the event of an elevator failure to communicate that it needs maintenance or intervention. This is only for demonstration purposes, in practise there would be a variety of potential errors that are each handled differently. Also there would be a much more thorough handling of an outgoing request that fails, however as that is outside of the scope of this exercise, I have left it to a bare minimum.
+
+7. **Elevator Capacity**: Although the specification specifically asks for the elevators to show "how many people they are carrying", but I decided that it would make more sense for the elevators to show how many people they had room for instead. I felt this is more intuitive and simplifies calculations such as working out how many elevators are needed on a floor.
 
 ## Assumptions
 
@@ -40,4 +44,4 @@ While creating this simulation, several assumptions have been made to focus the 
 
 ## Usage
 
-To run the simulation, build and run the project. You will be presented with a visualization of the current state of the elevators and prompted to enter a floor number to request an elevator. You can also randomize the elevators' positions and statuses by entering 'R' or exit the program by entering 'E'.
+To run the simulation, first replace the **local.settings.json** file's location with it's full location on your own system. Then simply build and run the project. You will be presented with a visualization of the current state of the elevators and prompted to enter a floor number to request an elevator. You can also randomize the elevators' positions and statuses by entering 'R' or exit the program by entering 'E'.
