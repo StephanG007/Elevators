@@ -1,0 +1,12 @@
+{
+  "NumberOfFloors": "10",
+  "NumberOfElevators": "5",
+  "ElevatorCapacity": "10",
+  "MovingBonus": "0,5",
+  "WrongDirectionPenalty": "10",
+  "DVT_API": "http://mockbin.com/bin/5e04fc62-0a1b-4428-9928-23fd8beb8537",
+  "DvtUsername": "james@email.co.za",
+  "DvtPassword": "P@ssw0rd1",
+  "SubscriptionKey": "DJJKD3987234923497DFDKDJDFDF",
+  "FailurePercent": "20"
+}
